@@ -30,5 +30,26 @@ app.get('/', async function (req, res){
         url: req.url,
         itemData: items.docs,
     }
-    res.render('pages/index', data);
+    res.render('pages/index', {title: "HLJapan | Home" , data});
+});
+
+app.get('/item/:itemid', async function(req,res){
+    try {
+        console.log(req.params.itemid);
+    } catch (error) {
+        
+    }
+    const item_id = req.params.itemid;
+    const item_ref = ingColl.doc(item_id);
+    const doc = await item_ref.get();
+    if(!doc.exists){
+        console.log('No such document!');
+    }else{
+        console.log('Document data:', doc.data());
+    }
+    let data = {
+        url: req.url,
+        itemData: doc.data(),
+    }
+    res.render('pages/item', data);
 });

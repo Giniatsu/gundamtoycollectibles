@@ -1,25 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
-    <%- include('../partials/head')  %>
+    <head>
+        <%- include('../partials/head')  %>
+    </head>
 <body>
     <%- include('../partials/nav')  %>
+        <div id="default-carousel" class="relative" data-carousel="static">
+            <!-- Carousel wrapper -->
+            <div class="relative h-96 overflow-hidden md:h-96">
+                <!-- Item 1 -->
+                <div class="duration-700 ease-in-out absolute inset-0 transition-all transform translate-x-0 z-20" data-carousel-item="">
+                    <span class="absolute text-2xl font-semibold text-white -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 sm:text-3xl dark:text-gray-800">First Slide</span>
+                    <img src="1.webp" class="absolute block h-full w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                </div>
+                <!-- Item 2 -->
+                <div class="duration-700 ease-in-out absolute inset-0 transition-all transform translate-x-full z-10" data-carousel-item="">
+                    <img src="2.jpg" class="absolute block h-full w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                </div>
+                <!-- Item 3 -->
+                <div class="duration-700 ease-in-out absolute inset-0 transition-all transform -translate-x-full z-10" data-carousel-item="">
+                    <img src="3.png" class="absolute block h-full w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                </div>
+            </div>
+            <!-- Slider indicators -->
+            <div class="absolute z-30 flex space-x-3 -translate-x-1/2 bottom-5 left-1/2">
+                <button type="button" class="w-3 h-3 rounded-full bg-white dark:bg-gray-800" aria-current="true" aria-label="Slide 1" data-carousel-slide-to="0"></button>
+                <button type="button" class="w-3 h-3 rounded-full bg-white/50 dark:bg-gray-800/50 hover:bg-white dark:hover:bg-gray-800" aria-current="false" aria-label="Slide 2" data-carousel-slide-to="1"></button>
+                <button type="button" class="w-3 h-3 rounded-full bg-white/50 dark:bg-gray-800/50 hover:bg-white dark:hover:bg-gray-800" aria-current="false" aria-label="Slide 3" data-carousel-slide-to="2"></button>
+            </div>
+            <!-- Slider controls -->
+            <button type="button" class="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev="">
+                <span class="inline-flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                    <svg aria-hidden="true" class="w-5 h-5 text-white sm:w-6 sm:h-6 dark:text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                    <span class="sr-only">Previous</span>
+                </span>
+            </button>
+            <button type="button" class="absolute top-0 right-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next="">
+                <span class="inline-flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                    <svg aria-hidden="true" class="w-5 h-5 text-white sm:w-6 sm:h-6 dark:text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                    <span class="sr-only">Next</span>
+                </span>
+            </button>
+        </div>
     <!-- Products Section  -->
-    <section id="products" class="flex flex-col bg-gray-100 absolute w-full justify-center items-center" style="top:94%">
+    <section id="products" class="flex flex-col bg-gray-100 absolute w-full justify-center items-center" style="top:65%">
         <!--  EG  -->
         <h1 id="fx" class="text-4xl font-bold mt-24">
             Entry Grade GUNDAM
         </h1>
         <div class="flex flex-row inline-grid grid-cols-3 gap-20 mt-20 mb-24">
-            <% for(var i=0; i<itemData.length; i++){ %>
-                <% if(itemData[i].data()['type'] == "EG") { %> 
+            <% for(var i=0; i<data.itemData.length; i++){ %>
+                <% console.log(data.itemData[i].data()) %> 
+                <% if(data.itemData[i].data()['type'] == "EG") { %> 
                 <div class="w-full max-w-sm bg-white rounded-2xl shadow-md dark:bg-gray-800 dark:border-gray-700">
                     <a href="#">
-                        <img class="p-2 rounded-t-lg" src="<%= itemData[i].data()['photoUrl'][1] %>" alt="product image" />
+                        <img class="p-2 rounded-t-lg" src="<%= data.itemData[i].data()['photoUrl'][1] %>" alt="product image" />
                     </a>
                     <div class="px-5 pb-5">
                         <a href="#">
                             <h5 class="text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">
-                                <%= itemData[i].data()['name'] %>
+                                <%= data.itemData[i].data()['name'] %>
                             </h5>
                         </a>
                         <div class="flex items-center mt-2.5 mb-5">
@@ -32,7 +72,7 @@
                         </div>
                         <div class="flex justify-between items-center">
                             <span class="text-3xl font-bold text-gray-900 dark:text-white">
-                                $<%= itemData[i].data()['price'] %>
+                                $<%= data.itemData[i].data()['price'] %>
                             </span>
                             <a href="#" class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">View Product</a>
                         </div>
@@ -46,16 +86,16 @@
             High Grade GUNDAM
         </h1>
         <div class="flex flex-row inline-grid grid-cols-3 gap-20 mt-20 mb-24">
-            <% for(var i=0; i<itemData.length; i++){ %>
-                <% if(itemData[i].data()['type'] == "HG") { %> 
+            <% for(var i=0; i<data.itemData.length; i++){ %>
+                <% if(data.itemData[i].data()['type'] == "HG") { %> 
                 <div class="w-full max-w-sm bg-white rounded-2xl shadow-md dark:bg-gray-800 dark:border-gray-700">
                     <a href="#">
-                        <img class="p-2 rounded-t-lg" src="<%= itemData[i].data()['photoUrl'][1] %>" alt="product image" />
+                        <img class="p-2 rounded-t-lg" src="<%= data.itemData[i].data()['photoUrl'][1] %>" alt="product image" />
                     </a>
                     <div class="px-5 pb-5">
                         <a href="#">
                             <h5 class="text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">
-                                <%= itemData[i].data()['name'] %>
+                                <%= data.itemData[i].data()['name'] %>
                             </h5>
                         </a>
                         <div class="flex items-center mt-2.5 mb-5">
@@ -68,7 +108,7 @@
                         </div>
                         <div class="flex justify-between items-center">
                             <span class="text-3xl font-bold text-gray-900 dark:text-white">
-                                $<%= itemData[i].data()['price'] %>
+                                $<%= data.itemData[i].data()['price'] %>
                             </span>
                             <a href="#" class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">View Product</a>
                         </div>
@@ -82,16 +122,16 @@
             Master Grade GUNDAM
         </h1>
         <div class="flex flex-row inline-grid grid-cols-3 gap-20 mt-20 mb-24">
-            <% for(var i=0; i<itemData.length; i++){ %>
-                <% if(itemData[i].data()['type'] == "MG") { %> 
+            <% for(var i=0; i<data.itemData.length; i++){ %>
+                <% if(data.itemData[i].data()['type'] == "MG") { %> 
                 <div class="w-full max-w-sm bg-white rounded-2xl shadow-md dark:bg-gray-800 dark:border-gray-700">
                     <a href="#">
-                        <img class="p-2 rounded-t-lg" src="<%= itemData[i].data()['photoUrl'][1] %>" alt="product image" />
+                        <img class="p-2 rounded-t-lg" src="<%= data.itemData[i].data()['photoUrl'][1] %>" alt="product image" />
                     </a>
                     <div class="px-5 pb-5">
                         <a href="#">
                             <h5 class="text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">
-                                <%= itemData[i].data()['name'] %>
+                                <%= data.itemData[i].data()['name'] %>
                             </h5>
                         </a>
                         <div class="flex items-center mt-2.5 mb-5">
@@ -104,43 +144,7 @@
                         </div>
                         <div class="flex justify-between items-center">
                             <span class="text-3xl font-bold text-gray-900 dark:text-white">
-                                $<%= itemData[i].data()['price'] %>
-                            </span>
-                            <a href="#" class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">View Product</a>
-                        </div>
-                    </div>
-                </div>
-                <% } %>
-            <% } %>
-        </div>
-        <!--  PG  -->
-        <h1 id="fx" class="text-4xl font-bold mt-24">
-            Perfect Grade GUNDAM
-        </h1>
-        <div class="flex flex-row inline-grid grid-cols-3 gap-20 mt-20 mb-24">
-            <% for(var i=0; i<itemData.length; i++){ %>
-                <% if(itemData[i].data()['type'] == "PG") { %> 
-                <div class="w-full max-w-sm bg-white rounded-2xl shadow-md dark:bg-gray-800 dark:border-gray-700">
-                    <a href="#">
-                        <img class="p-2 rounded-t-lg" src="<%= itemData[i].data()['photoUrl'][1] %>" alt="product image" />
-                    </a>
-                    <div class="px-5 pb-5">
-                        <a href="#">
-                            <h5 class="text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">
-                                <%= itemData[i].data()['name'] %>
-                            </h5>
-                        </a>
-                        <div class="flex items-center mt-2.5 mb-5">
-                            <svg aria-hidden="true" class="w-5 h-5 text-yellow-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>First star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                            <svg aria-hidden="true" class="w-5 h-5 text-yellow-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Second star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                            <svg aria-hidden="true" class="w-5 h-5 text-yellow-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Third star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                            <svg aria-hidden="true" class="w-5 h-5 text-yellow-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Fourth star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                            <svg aria-hidden="true" class="w-5 h-5 text-yellow-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Fifth star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                            <span class="bg-gray-200 text-gray-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-rgray-200 dark:text-gray-800 ml-3">5.0</span>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <span class="text-3xl font-bold text-gray-900 dark:text-white">
-                                $<%= itemData[i].data()['price'] %>
+                                $<%= data.itemData[i].data()['price'] %>
                             </span>
                             <a href="#" class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">View Product</a>
                         </div>
@@ -151,19 +155,19 @@
         </div>
         <!--  RG  -->
         <h1 id="fx" class="text-4xl font-bold mt-24">
-            Real Grade GUNDAM
+            Perfect Grade GUNDAM
         </h1>
         <div class="flex flex-row inline-grid grid-cols-3 gap-20 mt-20 mb-24">
-            <% for(var i=0; i<itemData.length; i++){ %>
-                <% if(itemData[i].data()['type'] == "RG") { %> 
+            <% for(var i=0; i<data.itemData.length; i++){ %>
+                <% if(data.itemData[i].data()['type'] == "RG") { %> 
                 <div class="w-full max-w-sm bg-white rounded-2xl shadow-md dark:bg-gray-800 dark:border-gray-700">
                     <a href="#">
-                        <img class="p-2 rounded-t-lg" src="<%= itemData[i].data()['photoUrl'][1] %>" alt="product image" />
+                        <img class="p-2 rounded-t-lg" src="<%= data.itemData[i].data()['photoUrl'][1] %>" alt="product image" />
                     </a>
                     <div class="px-5 pb-5">
                         <a href="#">
                             <h5 class="text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">
-                                <%= itemData[i].data()['name'] %>
+                                <%= data.itemData[i].data()['name'] %>
                             </h5>
                         </a>
                         <div class="flex items-center mt-2.5 mb-5">
@@ -176,7 +180,43 @@
                         </div>
                         <div class="flex justify-between items-center">
                             <span class="text-3xl font-bold text-gray-900 dark:text-white">
-                                $<%= itemData[i].data()['price'] %>
+                                $<%= data.itemData[i].data()['price'] %>
+                            </span>
+                            <a href="#" class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">View Product</a>
+                        </div>
+                    </div>
+                </div>
+                <% } %>
+            <% } %>
+        </div>
+        <!--  PG  -->
+        <h1 id="fx" class="text-4xl font-bold mt-24">
+            Real Grade GUNDAM
+        </h1>
+        <div class="flex flex-row inline-grid grid-cols-3 gap-20 mt-20 mb-24">
+            <% for(var i=0; i<data.itemData.length; i++){ %>
+                <% if(data.itemData[i].data()['type'] == "PG") { %> 
+                <div class="w-full max-w-sm bg-white rounded-2xl shadow-md dark:bg-gray-800 dark:border-gray-700">
+                    <a href="#">
+                        <img class="p-2 rounded-t-lg" src="<%= data.itemData[i].data()['photoUrl'][1] %>" alt="product image" />
+                    </a>
+                    <div class="px-5 pb-5">
+                        <a href="#">
+                            <h5 class="text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">
+                                <%= data.itemData[i].data()['name'] %>
+                            </h5>
+                        </a>
+                        <div class="flex items-center mt-2.5 mb-5">
+                            <svg aria-hidden="true" class="w-5 h-5 text-yellow-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>First star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                            <svg aria-hidden="true" class="w-5 h-5 text-yellow-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Second star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                            <svg aria-hidden="true" class="w-5 h-5 text-yellow-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Third star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                            <svg aria-hidden="true" class="w-5 h-5 text-yellow-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Fourth star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                            <svg aria-hidden="true" class="w-5 h-5 text-yellow-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Fifth star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                            <span class="bg-gray-200 text-gray-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-rgray-200 dark:text-gray-800 ml-3">5.0</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-3xl font-bold text-gray-900 dark:text-white">
+                                $<%= data.itemData[i].data()['price'] %>
                             </span>
                             <a href="#" class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">View Product</a>
                         </div>
@@ -190,16 +230,16 @@
             Beginner Grade GUNDAM
         </h1>
         <div class="flex flex-row inline-grid grid-cols-3 gap-20 mt-20 mb-24">
-            <% for(var i=0; i<itemData.length; i++){ %>
-                <% if(itemData[i].data()['type'] == "BB") { %> 
+            <% for(var i=0; i<data.itemData.length; i++){ %>
+                <% if(data.itemData[i].data()['type'] == "BB") { %> 
                 <div class="w-full max-w-sm bg-white rounded-2xl shadow-md dark:bg-gray-800 dark:border-gray-700">
                     <a href="#">
-                        <img class="p-2 rounded-t-lg" src="<%= itemData[i].data()['photoUrl'][1] %>" alt="product image" />
+                        <img class="p-2 rounded-t-lg" src="<%= data.itemData[i].data()['photoUrl'][1] %>" alt="product image" />
                     </a>
                     <div class="px-5 pb-5">
                         <a href="#">
                             <h5 class="text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">
-                                <%= itemData[i].data()['name'] %>
+                                <%= data.itemData[i].data()['name'] %>
                             </h5>
                         </a>
                         <div class="flex items-center mt-2.5 mb-5">
@@ -212,7 +252,7 @@
                         </div>
                         <div class="flex justify-between items-center">
                             <span class="text-3xl font-bold text-gray-900 dark:text-white">
-                                $<%= itemData[i].data()['price'] %>
+                                $<%= data.itemData[i].data()['price'] %>
                             </span>
                             <a href="#" class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">View Product</a>
                         </div>
@@ -222,5 +262,7 @@
             <% } %>
         </div>
     </section>
+    <!-- End of Product Section -->
+    <script src="https://unpkg.com/flowbite@1.5.3/dist/flowbite.js"></script>
 </body>
 </html>
