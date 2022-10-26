@@ -1,5 +1,6 @@
 var express = require('express');
 var app = express();
+const dayjs = require('dayjs')
 app.use(express.static('assets'))
 
 const port = process.env.PORT || 3000;
@@ -62,5 +63,29 @@ app.get('/item/:itemid', async function(req,res){
         hist_array
     }
 
-    res.render('pages/item', {data});
+    res.render('pages/item', {data, dayjs});
 });
+
+// app.post('/item/:itemid', async function(req,res){
+//     try {
+//         console.log(req.params.itemid);
+//     } catch (error) {
+        
+//     }
+//     const item_id = req.params.itemid;
+//     const item_ref = ingColl.doc(item_id);
+//     const doc = await item_ref.get();
+//     if(!doc.exists){
+//         console.log('No such document!');
+//     }else{
+//         console.log('Document data:', doc.data());
+//     }
+
+//     const sales_ref = ingColl.doc(item_id).collection('sales')
+
+//     // ang pag kuha sa data from the form kay req.body.inputNameHere
+    
+//     // add entry to sales diri ikaw na bahala
+
+//     res.redirect(/item/${item_id}); // redirect back to the get page
+// });
