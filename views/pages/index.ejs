@@ -53,11 +53,11 @@
                 <% console.log(data.itemData[i].data()) %> 
                 <% if(data.itemData[i].data()['type'] == "EG") { %> 
                 <div class="w-full max-w-sm bg-white rounded-2xl shadow-md dark:bg-gray-800 dark:border-gray-700">
-                    <a href="#">
+                    <a href="/item/<%= data.itemData[i].id %>">
                         <img class="p-2 rounded-t-lg" src="<%= data.itemData[i].data()['photoUrl'][1] %>" alt="product image" />
                     </a>
                     <div class="px-5 pb-5">
-                        <a href="#">
+                        <a href="/item/<%= data.itemData[i].id %>">
                             <h5 class="text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">
                                 <%= data.itemData[i].data()['name'] %>
                             </h5>
@@ -74,7 +74,7 @@
                             <span class="text-3xl font-bold text-gray-900 dark:text-white">
                                 $<%= data.itemData[i].data()['price'] %>
                             </span>
-                            <a href="#" class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">View Product</a>
+                            <a href="/item/<%= data.itemData[i].id %>" class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">View Product</a>
                         </div>
                     </div>
                 </div>
@@ -89,11 +89,11 @@
             <% for(var i=0; i<data.itemData.length; i++){ %>
                 <% if(data.itemData[i].data()['type'] == "HG") { %> 
                 <div class="w-full max-w-sm bg-white rounded-2xl shadow-md dark:bg-gray-800 dark:border-gray-700">
-                    <a href="#">
+                    <a href="/item/<%= data.itemData[i].id %>">
                         <img class="p-2 rounded-t-lg" src="<%= data.itemData[i].data()['photoUrl'][1] %>" alt="product image" />
                     </a>
                     <div class="px-5 pb-5">
-                        <a href="#">
+                        <a href="/item/<%= data.itemData[i].id %>">
                             <h5 class="text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">
                                 <%= data.itemData[i].data()['name'] %>
                             </h5>
@@ -110,7 +110,7 @@
                             <span class="text-3xl font-bold text-gray-900 dark:text-white">
                                 $<%= data.itemData[i].data()['price'] %>
                             </span>
-                            <a href="#" class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">View Product</a>
+                            <a href="/item/<%= data.itemData[i].id %>" class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">View Product</a>
                         </div>
                     </div>
                 </div>
@@ -125,11 +125,11 @@
             <% for(var i=0; i<data.itemData.length; i++){ %>
                 <% if(data.itemData[i].data()['type'] == "MG") { %> 
                 <div class="w-full max-w-sm bg-white rounded-2xl shadow-md dark:bg-gray-800 dark:border-gray-700">
-                    <a href="#">
+                    <a href="/item/<%= data.itemData[i].id %>">
                         <img class="p-2 rounded-t-lg" src="<%= data.itemData[i].data()['photoUrl'][1] %>" alt="product image" />
                     </a>
                     <div class="px-5 pb-5">
-                        <a href="#">
+                        <a href="/item/<%= data.itemData[i].id %>">
                             <h5 class="text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">
                                 <%= data.itemData[i].data()['name'] %>
                             </h5>
@@ -146,7 +146,7 @@
                             <span class="text-3xl font-bold text-gray-900 dark:text-white">
                                 $<%= data.itemData[i].data()['price'] %>
                             </span>
-                            <a href="#" class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">View Product</a>
+                            <a href="/item/<%= data.itemData[i].id %>" class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">View Product</a>
                         </div>
                     </div>
                 </div>
@@ -161,11 +161,11 @@
             <% for(var i=0; i<data.itemData.length; i++){ %>
                 <% if(data.itemData[i].data()['type'] == "RG") { %> 
                 <div class="w-full max-w-sm bg-white rounded-2xl shadow-md dark:bg-gray-800 dark:border-gray-700">
-                    <a href="#">
+                    <a href="/item/<%= data.itemData[i].id %>">
                         <img class="p-2 rounded-t-lg" src="<%= data.itemData[i].data()['photoUrl'][1] %>" alt="product image" />
                     </a>
                     <div class="px-5 pb-5">
-                        <a href="#">
+                        <a href="/item/<%= data.itemData[i].id %>">
                             <h5 class="text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">
                                 <%= data.itemData[i].data()['name'] %>
                             </h5>
@@ -182,7 +182,7 @@
                             <span class="text-3xl font-bold text-gray-900 dark:text-white">
                                 $<%= data.itemData[i].data()['price'] %>
                             </span>
-                            <a href="#" class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">View Product</a>
+                            <a href="/item/<%= data.itemData[i].id %>" class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">View Product</a>
                         </div>
                     </div>
                 </div>
@@ -197,11 +197,11 @@
             <% for(var i=0; i<data.itemData.length; i++){ %>
                 <% if(data.itemData[i].data()['type'] == "PG") { %> 
                 <div class="w-full max-w-sm bg-white rounded-2xl shadow-md dark:bg-gray-800 dark:border-gray-700">
-                    <a href="#">
+                    <a href="/item/<%= data.itemData[i].id %>">
                         <img class="p-2 rounded-t-lg" src="<%= data.itemData[i].data()['photoUrl'][1] %>" alt="product image" />
                     </a>
                     <div class="px-5 pb-5">
-                        <a href="#">
+                        <a href="/item/<%= data.itemData[i].id %>">
                             <h5 class="text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">
                                 <%= data.itemData[i].data()['name'] %>
                             </h5>
@@ -218,7 +218,7 @@
                             <span class="text-3xl font-bold text-gray-900 dark:text-white">
                                 $<%= data.itemData[i].data()['price'] %>
                             </span>
-                            <a href="#" class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">View Product</a>
+                            <a href="/item/<%= data.itemData[i].id %>" class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">View Product</a>
                         </div>
                     </div>
                 </div>
@@ -233,11 +233,11 @@
             <% for(var i=0; i<data.itemData.length; i++){ %>
                 <% if(data.itemData[i].data()['type'] == "BB") { %> 
                 <div class="w-full max-w-sm bg-white rounded-2xl shadow-md dark:bg-gray-800 dark:border-gray-700">
-                    <a href="#">
+                    <a href="/item/<%= data.itemData[i].id %>">
                         <img class="p-2 rounded-t-lg" src="<%= data.itemData[i].data()['photoUrl'][1] %>" alt="product image" />
                     </a>
                     <div class="px-5 pb-5">
-                        <a href="#">
+                        <a href="/item/<%= data.itemData[i].id %>">
                             <h5 class="text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">
                                 <%= data.itemData[i].data()['name'] %>
                             </h5>
@@ -254,7 +254,7 @@
                             <span class="text-3xl font-bold text-gray-900 dark:text-white">
                                 $<%= data.itemData[i].data()['price'] %>
                             </span>
-                            <a href="#" class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">View Product</a>
+                            <a href="/item/<%= data.itemData[i].id %>" class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">View Product</a>
                         </div>
                     </div>
                 </div>

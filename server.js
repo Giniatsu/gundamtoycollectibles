@@ -47,9 +47,20 @@ app.get('/item/:itemid', async function(req,res){
     }else{
         console.log('Document data:', doc.data());
     }
+
+    const sales_ref = ingColl.doc(item_id).collection('sales')
+    hist_array = []
+    await sales_ref.get().then(subCol => {
+        subCol.docs.forEach(element => {
+            hist_array.push(element.data())
+        })
+    })
+
     let data = {
         url: req.url,
         itemData: doc.data(),
+        hist_array
     }
-    res.render('pages/item', data);
+
+    res.render('pages/item', {data});
 });
