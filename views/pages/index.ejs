@@ -264,5 +264,33 @@
     </section>
     <!-- End of Product Section -->
     <script src="https://unpkg.com/flowbite@1.5.3/dist/flowbite.js"></script>
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-app.js";
+        import { getAuth } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-auth.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+      
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+          apiKey: "AIzaSyA4WOci7uJIlAhi0KXLbhGBN0FQKPcaNeY",
+          authDomain: "jpgundamtoycollectibles.firebaseapp.com",
+          projectId: "jpgundamtoycollectibles",
+          storageBucket: "jpgundamtoycollectibles.appspot.com",
+          messagingSenderId: "542948696339",
+          appId: "1:542948696339:web:71deef5b2d8c7635acbae6"
+        };
+      
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+
+        let provider = new firebase.auth.GoogleAuthProvider();
+
+        document.getElementById('googleBtn').addEventListener('click', GoogleLogin);
+
+        function GoogleLogin(){
+            console.log('Login call')
+        }
+      </script>
 </body>
 </html>

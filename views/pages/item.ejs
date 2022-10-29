@@ -59,22 +59,20 @@
         <div class="col-span-1">
             <button type="button" disabled class="inline-flex relative items-center p-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
             <i class="fa-solid fa-cart-circle-check"></i>
-            <div class="inline-flex absolute -top-2 -right-2 justify-center items-center w-6 h-6 text-xs font-bold text-white bg-red-500 rounded-full border-2 border-white dark:border-gray-900"><%= data.hist_array.length %> </div>
+            <div id="badge-number" class="inline-flex absolute -top-2 -right-2 justify-center items-center w-6 h-6 text-xs font-bold text-white bg-red-500 rounded-full border-2 border-white dark:border-gray-900"></div>
             </button>
         </div>
         <div class="col-span-1">
-              <form method="post">
-                <div class="inline-flex rounded-md shadow-sm" role="group">
-                    <button type="button" class="inline-flex items-center py-2 px-4 text-sm font-medium text-gray-900 bg-transparent rounded-l-lg border border-gray-900 hover:bg-gray-900 hover:text-white focus:z-10 focus:ring-2 focus:ring-gray-500 focus:bg-gray-900 focus:text-white dark:border-white dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:bg-gray-700">
-                        <i class="fa-solid fa-minus"></i>
-                    </button>
-                    <input type="text" id="small-input" name="quantityinput" class="block p-2 w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                    <button type="button" class="inline-flex items-center py-2 px-4 text-sm font-medium text-gray-900 bg-transparent rounded-r-md border border-gray-900 hover:bg-gray-900 hover:text-white focus:z-10 focus:ring-2 focus:ring-gray-500 focus:bg-gray-900 focus:text-white dark:border-white dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:bg-gray-700">
-                        <i class="fa-solid fa-plus"></i>
-                    </button>
-                  </div>
-                <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add Sales</button>
-              </form>
+            <div class="inline-flex rounded-md shadow-sm" role="group">
+                <button type="button" onclick="subtractQuantity()" class="inline-flex items-center py-2 px-4 text-sm font-medium text-gray-900 bg-transparent rounded-l-lg border border-gray-900 hover:bg-gray-900 hover:text-white focus:z-10 focus:ring-2 focus:ring-gray-500 focus:bg-gray-900 focus:text-white dark:border-white dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:bg-gray-700">
+                    <i class="fa-solid fa-minus"></i>
+                </button>
+                <input type="text" readonly id="quantityInput" name="quantityinput" class="block p-2 w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="0">
+                <button type="button" onclick="addQuantity()" class="inline-flex items-center py-2 px-4 text-sm font-medium text-gray-900 bg-transparent rounded-r-md border border-gray-900 hover:bg-gray-900 hover:text-white focus:z-10 focus:ring-2 focus:ring-gray-500 focus:bg-gray-900 focus:text-white dark:border-white dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:bg-gray-700">
+                    <i class="fa-solid fa-plus"></i>
+                </button>
+            </div>
+            <button type="button" onclick="createEntry()" class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add Sales</button>
         </div>
         <div class="col-span-2">
             <div class="overflow-x-auto relative">
@@ -92,25 +90,86 @@
                             </th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <% for(var i=0; i<data.hist_array.length; i++) { %> 
-                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                            <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                <%= i+1 %> 
-                            </th>
-                            <td class="py-4 px-6">
-                                <%= dayjs(data.hist_array[i].dateCreated.toDate()).format('MMM-DD-YYYY hh:mm A') %> 
-                            </td>
-                            <td class="py-4 px-6">
-                                <%= data.hist_array[i].quantity%> 
-                            </td>
-                        </tr>
-                        <% } %> 
+                    <tbody id="sales-table-body">
                     </tbody>
                 </table>
             </div>
         </div>
       </div>
     <script src="https://unpkg.com/flowbite@1.5.3/dist/flowbite.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
+    <script>
+        const quantityInput = document.getElementById('quantityInput');
+
+
+        const addQuantity = () => {
+            quantityInput.value = parseInt(quantityInput.value) + 1
+        }
+
+        const subtractQuantity = () => {
+            if (quantityInput.value <= 0) {
+                quantityInput.value = 0
+                return
+            }
+
+            quantityInput.value = parseInt(quantityInput.value) - 1
+        }
+
+        const url = '<%- data.url %>'
+
+        
+        const hist_array = <%- JSON.stringify(data.hist_array) %>;
+
+        const createEntry = () => {
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    quantityInput: quantityInput.value
+                })
+            }).then(res => res.json()).then(data => {
+                if (data.success === 'true') {
+                    hist_array.push(data.data)
+                    updateTable()
+                }
+            })
+        }
+
+        const updateTable = () => {
+            const salesBody = document.getElementById('sales-table-body')
+            const badgeNumber = document.getElementById('badge-number')
+
+            let childToAdd = ''
+            for (var i=0; i < hist_array.length; i++) {
+                console.log(hist_array[i])
+                let id = i + 1
+                let date = hist_array[i].dateCreated
+                let quantity = hist_array[i].quantity
+
+                const template = `
+                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                        <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            ${id}
+                        </th>
+                        <td class="py-4 px-6">
+                            ${date}
+                        </td>
+                        <td class="py-4 px-6">
+                            ${quantity}
+                        </td>
+                    </tr>
+                `
+
+                childToAdd += template
+            }
+            
+            salesBody.innerHTML = childToAdd.trim()
+            badgeNumber.innerHTML = hist_array.length
+        }
+        
+        updateTable()
+    </script>
 </body>
 </html>

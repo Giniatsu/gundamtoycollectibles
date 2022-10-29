@@ -1,7 +1,11 @@
 var express = require('express');
 var app = express();
 const dayjs = require('dayjs')
+const bodyParser = require('body-parser')
 app.use(express.static('assets'))
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json())
 
 const port = process.env.PORT || 3000;
 app.listen(port,);
@@ -49,11 +53,14 @@ app.get('/item/:itemid', async function(req,res){
         console.log('Document data:', doc.data());
     }
 
-    const sales_ref = ingColl.doc(item_id).collection('sales')
+    const sales_ref = ingColl.doc(item_id).collection('sales').orderBy('dateCreated')
     hist_array = []
     await sales_ref.get().then(subCol => {
         subCol.docs.forEach(element => {
-            hist_array.push(element.data())
+            hist_array.push({
+                ...element.data(),
+                dateCreated: dayjs(element.data().dateCreated.toDate()).format('MMM-DD-YYYY hh:mm A')
+            })
         })
     })
 
@@ -66,26 +73,43 @@ app.get('/item/:itemid', async function(req,res){
     res.render('pages/item', {data, dayjs});
 });
 
-// app.post('/item/:itemid', async function(req,res){
-//     try {
-//         console.log(req.params.itemid);
-//     } catch (error) {
-        
-//     }
-//     const item_id = req.params.itemid;
-//     const item_ref = ingColl.doc(item_id);
-//     const doc = await item_ref.get();
-//     if(!doc.exists){
-//         console.log('No such document!');
-//     }else{
-//         console.log('Document data:', doc.data());
-//     }
+app.post('/item/:itemid', async function(req,res){
+    try {
+        console.log(req.params.itemid);
+    } catch (error) {
 
-//     const sales_ref = ingColl.doc(item_id).collection('sales')
+    }
 
-//     // ang pag kuha sa data from the form kay req.body.inputNameHere
-    
-//     // add entry to sales diri ikaw na bahala
+    try {
+        const item_id = req.params.itemid;
+        const item_ref = ingColl.doc(item_id);
+        const doc = await item_ref.get();
+        if(!doc.exists) {
+            console.log('No such document!');
+        } else {
+            // console.log('Document data:', doc.data());
+        }
 
-//     res.redirect(/item/${item_id}); // redirect back to the get page
-// });
+        const sales_ref = ingColl.doc(item_id).collection('sales')
+
+        const timestamp = fs.firestore.FieldValue.serverTimestamp()
+        sales_ref.add({
+            dateCreated: timestamp,
+            quantity: req.body.quantityInput
+        })
+
+        res.json({
+            success: 'true',
+            data: {
+                dateCreated: dayjs(new Date()).format('MMM-DD-YYYY hh:mm A'),
+                quantity: req.body.quantityInput
+            }
+        })
+    } catch (err) {
+        res.json({
+            success: 'false',
+            error: err.message
+        })
+    }
+
+});
