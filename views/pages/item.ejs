@@ -4,14 +4,22 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title></title>
+    <title><%= data.itemData.name %> </title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
     <link href="https://cdn.jsdelivr.net/gh/hung1001/font-awesome-pro-v6@44659d9/css/all.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-    <%- include('../partials/nav')  %>
+    <nav class="bg-white border-gray-200 px-2 sm:px-4 py-2.5 top-0 dark:bg-white">
+        <div class="container flex flex-wrap justify-between items-center mx-auto">
+          <a href="/" class="flex items-center">
+              <img src="/hlj-logo-PhotoRoom.png" class="mr-3 h-6 sm:h-9" alt="HLJ">
+              <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-blace">Gundam</span>
+          </a>
+        </div>
+    </nav>
+      
     <div class="grid grid-flow-row-dense grid-cols-3 grid-rows-1 ...">
         <div class="row-span-5">
             <div id="default-carousel" class="relative" data-carousel="static">
